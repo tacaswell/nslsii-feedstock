@@ -23,6 +23,7 @@ outputs:
       name: nslsii-base
     build:
       script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      noarch: python
       python:
         entry_points:
           - sync-experiment = nslsii.sync_experiment:main
@@ -31,11 +32,11 @@ outputs:
 
     requirements:
       host:
-        - python ${{ python_min }}
+        - python
         - pip
         - setuptools
       run:
-        - python >=${{ python_min }}
+        - python
         - appdirs
         - bluesky-base >=1.8.1
         - bluesky-kafka >=0.8.0
@@ -57,7 +58,6 @@ outputs:
         - msgpack-numpy
         - msgpack-python >=1.0.0
         - pycryptodome
-        - recordwhat
         - numpy
         - psutil
         - setuptools
@@ -77,7 +77,6 @@ outputs:
             - nslsii.common.ipynb.nbviewer
             - nslsii.detectors
             - nslsii.detectors.QEPro
-            - nslsii.detectors.maia
             - nslsii.detectors.trigger_mixins
             - nslsii.detectors.utils
             - nslsii.detectors.xspress3
@@ -95,13 +94,14 @@ outputs:
           pip_check: false
       - requirements:
           run:
-            - python ${{ python_min }}
+            - python
         script:
           - sync-experiment --help
 
   - package:
       name: nslsii-iocs
     build:
+      noarch: python
       python:
         entry_points:
           - what-is-ioc = nslsii.epics_utils:main
@@ -109,9 +109,9 @@ outputs:
 
     requirements:
       host:
-        - python ${{ python_min }}
+        - python
       run:
-        - python >=${{ python_min }}
+        - python
         - ${{ pin_subpackage('nslsii-base', upper_bound="x.x.x") }}
         - caproto
         - requests
@@ -127,21 +127,24 @@ outputs:
           pip_check: false
       - requirements:
           run:
-            - python ${{ python_min }}
+            - python
         script:
           - what-is-ioc --help
           - axis-saver-ioc --help
 
   - package:
       name: nslsii
+    build:
+      noarch: python
     requirements:
       host:
-        - python ${{ python_min }}
+        - python
       run:
-        - python >=${{ python_min }}
+        - python
         - ${{ pin_subpackage('nslsii-base', upper_bound="x.x.x") }}
         - ${{ pin_subpackage('nslsii-iocs', upper_bound="x.x.x") }}
         - opencv
+        - recordwhat
 
     tests:
       - python:
