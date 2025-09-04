@@ -1,0 +1,119 @@
+schema_version: 1
+
+context:
+  name: nslsii
+  version: 0.11.2
+  python_min: 3.10
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/nslsii-${{ version }}.tar.gz
+  sha256: eee20c1df75d955a31e258f261ff1b224f4856bf8698f1de0d8afb64820169dc
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - sync-experiment = nslsii.sync_experiment:main
+      - what-is-ioc = nslsii.epics_utils:main
+      - axis-saver-ioc = nslsii.iocs.caproto_saver:start_axis_ioc
+
+requirements:
+  host:
+    - python 3.10.*
+    - pip
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+    - appdirs
+    - bluesky-base >=1.8.1
+    - bluesky-kafka >=0.8.0
+    - caproto
+    - databroker >=2.0.0b59
+    - h5py
+    - httpx
+    - ipython
+    - ipywidgets
+    - ldap3
+    - matplotlib-base
+    - msgpack-numpy
+    - msgpack-python >=1.0.0
+    - numpy
+    - opencv
+    - ophyd
+    - packaging
+    - pillow
+    - psutil
+    - pycryptodome
+    - pyolog
+    - recordwhat
+    - redis-json-dict
+    - redis-py
+    - requests
+    - setuptools
+    - shortuuid
+
+tests:
+  - python:
+      imports:
+        - nslsii
+        - nslsii.ad33
+        - nslsii.areadetector
+        - nslsii.areadetector.xspress3
+        - nslsii.common
+        - nslsii.common.ipynb
+        - nslsii.common.ipynb.animation
+        - nslsii.common.ipynb.info
+        - nslsii.common.ipynb.logutils
+        - nslsii.common.ipynb.nbviewer
+        - nslsii.detectors
+        - nslsii.detectors.QEPro
+        - nslsii.detectors.maia
+        - nslsii.detectors.trigger_mixins
+        - nslsii.detectors.utils
+        - nslsii.detectors.webcam
+        - nslsii.detectors.xspress3
+        - nslsii.detectors.zebra
+        - nslsii.devices
+        - nslsii.epics_utils
+        - nslsii.iocs
+        - nslsii.iocs.caproto_saver
+        - if: not (win and match(python, "==3.12"))
+          then: nslsii.iocs.eps_two_state_ioc_sim
+        - nslsii.iocs.utils
+        - nslsii.kafka_utils
+        - nslsii.md_dict
+        - nslsii.motors.delta_tau
+        - nslsii.plans
+        - nslsii.plans.maia
+        - nslsii.sync_experiment
+        - nslsii.sync_experiment.sync_experiment
+        - nslsii.temperature_controllers
+        - nslsii.transforms
+      pip_check: false
+  - requirements:
+      run:
+        - python ${{ python_min }}
+    script:
+      - sync-experiment --help
+      - what-is-ioc --help
+      - axis-saver-ioc --help
+
+about:
+  summary: Tools for data collection and analysis at NSLS-II
+  license: BSD-3-Clause
+  license_file: LICENSE
+  homepage: https://github.com/NSLS-II/nslsii
+
+extra:
+  recipe-maintainers:
+    - gwbischof
+    - mrakitin
+    - jennmald
+    - conda-forge/event-model
+
