@@ -28,6 +28,8 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-nslsii-green.svg)](https://anaconda.org/conda-forge/nslsii) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/nslsii.svg)](https://anaconda.org/conda-forge/nslsii) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/nslsii.svg)](https://anaconda.org/conda-forge/nslsii) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/nslsii.svg)](https://anaconda.org/conda-forge/nslsii) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-nslsii--base-green.svg)](https://anaconda.org/conda-forge/nslsii-base) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/nslsii-base.svg)](https://anaconda.org/conda-forge/nslsii-base) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/nslsii-base.svg)](https://anaconda.org/conda-forge/nslsii-base) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/nslsii-base.svg)](https://anaconda.org/conda-forge/nslsii-base) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-nslsii--iocs-green.svg)](https://anaconda.org/conda-forge/nslsii-iocs) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/nslsii-iocs.svg)](https://anaconda.org/conda-forge/nslsii-iocs) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/nslsii-iocs.svg)](https://anaconda.org/conda-forge/nslsii-iocs) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/nslsii-iocs.svg)](https://anaconda.org/conda-forge/nslsii-iocs) |
 
 Installing nslsii
 =================
@@ -39,16 +41,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `nslsii` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `nslsii, nslsii-base, nslsii-iocs` can be installed with `conda`:
 
 ```
-conda install nslsii
+conda install nslsii nslsii-base nslsii-iocs
 ```
 
 or with `mamba`:
 
 ```
-mamba install nslsii
+mamba install nslsii nslsii-base nslsii-iocs
 ```
 
 It is possible to list all of the versions of `nslsii` available on your platform with `conda`:
